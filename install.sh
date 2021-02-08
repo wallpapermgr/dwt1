@@ -45,11 +45,11 @@ scripts_check
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Defaults
 APPNAME="${APPNAME:-dwt1}"
-APPDIR="${WALLPAPERS:-$SHARE/wallpapers}/$APPNAME"
-INSTDIR="$SHARE/CasjaysDev/installed/$SCRIPTS_PREFIX/$APPNAME"
+APPDIR="${APPDIR:-$SHARE/wallpapers/$APPNAME}"
+INSTDIR="${INSTDIR:-SHARE/CasjaysDev/installed/$SCRIPTS_PREFIX/$APPNAME}"
 REPO="${WALLPAPERMGRREPO}"
 REPORAW="$REPO/$APPNAME/raw"
-APPVERSION="$(__appversion ${REPO:-https://github.com/$SCRIPTS_PREFIX}/$APPNAME/raw/master/version.txt)"
+APPVERSION="$(__appversion "${REPO:-https://github.com/$SCRIPTS_PREFIX}/$APPNAME/raw/master/version.txt")"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Call the wallpapermgr function
@@ -60,24 +60,32 @@ wallpapermgr_install
 show_optvars "$@"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# end with a space
+APP=""
+
+# install packages - useful for package that have the same name on all oses
+install_packages "$APP"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Ensure directories exist
 ensure_dirs
 ensure_perms
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Main progam
-if [ -d "$APPDIR/.git" ]; then
-  execute \
-    "git_update $APPDIR" \
-    "Updating $APPNAME configurations"
-else
-  execute \
-    "git_clone -q $REPO/$APPNAME $APPDIR" \
-    "Installing $APPNAME configurations"
+if __am_i_online; then
+  if [ -d "$INSTDIR/.git" ]; then
+    execute \
+      "git_update $INSTDIR" \
+      "Updating $APPNAME wallpaper pack"
+  else
+    execute \
+      "git_clone -q $REPO/$APPNAME $INSTDIR" \
+      "Installing $APPNAME wallpaper pack"
+  fi
+  # exit on fail
+  failexitcode $? "Git has failed"
 fi
-
-# exit on fail
-failexitcode
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # run post install scripts
@@ -96,4 +104,5 @@ wallpapermgr_install_version
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # exit
 run_exit
+
 # end
