@@ -45,8 +45,8 @@ scripts_check
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Defaults
 APPNAME="${APPNAME:-dwt1}"
-APPDIR="${APPDIR:-$SHARE/wallpapers/$APPNAME}"
-INSTDIR="${INSTDIR:-SHARE/CasjaysDev/installed/$SCRIPTS_PREFIX/$APPNAME}"
+APPDIR="${APPDIR:-$SHARE/wallpapers}/$APPNAME"
+INSTDIR="${INSTDIR:-SHARE/CasjaysDev/installed/$SCRIPTS_PREFIX}/$APPNAME"
 REPO="${WALLPAPERMGRREPO}"
 REPORAW="$REPO/$APPNAME/raw"
 APPVERSION="$(__appversion "${REPO:-https://github.com/$SCRIPTS_PREFIX}/$APPNAME/raw/master/version.txt")"
