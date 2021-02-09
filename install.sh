@@ -53,6 +53,9 @@ REPO="${WALLPAPERMGRREPO:-https://github.com/wallpapermgr/$APPNAME}"
 REPORAW="$REPO/$APPNAME/raw"
 APPVERSION="$(__appversion "${REPO:-https://github.com/$SCRIPTS_PREFIX}/$APPNAME/raw/master/version.txt")"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Require a version higher than
+wallpapermgr_req_version "$APPVERSION"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Call the wallpapermgr function
 wallpapermgr_install
 wallpapermgr_run_init
