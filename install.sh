@@ -49,7 +49,7 @@ scripts_check
 APPNAME="${APPNAME:-dwt1}"
 APPDIR="$SHARE/wallpapers/$APPNAME"
 INSTDIR="$SHARE/CasjaysDev/wallpapermgr/$APPNAME"
-REPO_BRANCH="${GIT_REPO_BRANCH:-master}"
+REPO_BRANCH="${GIT_REPO_BRANCH:-main}"
 REPO="${WALLPAPERMGRREPO:-https://github.com/wallpapermgr}/$APPNAME"
 REPORAW="${REPORAW:-$REPO/raw}"
 APPVERSION="$(__appversion "$REPORAW/master/version.txt")"
